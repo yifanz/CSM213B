@@ -5,6 +5,15 @@ Yan Zhang
 
 Yi-Fan Zhang (yifanz@ucla.edu)
 
+#### Table of Contents
+
+1. [Project Proposal](#project-proposal)
+2. [Getting Started](#getting-started)
+3. [References](#references)
+4. [Attributions](#attributions)
+
+## Project Proposal
+
 ## Getting Started
 
 ### OS and toolchain
@@ -126,3 +135,8 @@ The `ntb_firmware_update` is a python script that will communicate with the IAP 
 The script should be invoked with the following pattern `ntb_firmware_update <firmware binary> <IP address of device>`.
 Remember to replace the `192.168.50.165` from the example above with the IP address of your device and the `./build/ntb_anchor.bin` with the path of the firmware you want to load.
 
+Upon reset, the device will wait 20 seconds for firmware update requests before entering the currently loaded program.
+
+## References
+
+## Attributions
