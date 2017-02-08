@@ -14,6 +14,10 @@ Yi-Fan Zhang (yifanz@ucla.edu)
 
 ## Project Proposal
 
+Maintaining accurate time synchonization and localization is a common requirement for many embedded systems.
+Often means increasing communication between devices at the expense of energy efficiency.
+This is highly undesirable for energy-constrained systems and in the case of large scale deployments, the energy cost becomes magnified.
+
 ## Getting Started
 
 ### OS and toolchain
