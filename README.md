@@ -14,9 +14,22 @@ Yi-Fan Zhang (yifanz@ucla.edu)
 
 ## Project Proposal
 
-Maintaining accurate time synchonization and localization is a common requirement for many embedded systems.
-Often means increasing communication between devices at the expense of energy efficiency.
-This is highly undesirable for energy-constrained systems and in the case of large scale deployments, the energy cost becomes magnified.
+Maintaining accurate time synchonization and localization is a common requirement for many networked embedded systems.
+Often the only available means of lowering error is by increasing communication between devices at the expense of energy efficiency.
+This is highly undesirable for energy-constrained systems as well as large scale deployments where the energy cost becomes magnified.
+
+While some messaging between devices is inevitable in the system we are investigating, we believe that by judiciously duty cycling the operation of the system, we can mitigate the energy overhead without significantly degrading the accuracy of the localization and time synchronization.
+Prelimiary offline simulations strongly suggest that the Kalman filter covariance is a good indicator for the state of synchronization of the system<sup>[1](#ref1)</sup>.
+By exposing this information to the control system in realtime, we could adjust the messaging rate with reference to a desired confidence threshold and predict the optimal sleep and wake schedule for each device.
+We propose to do a hardware and software implemention of the PLoTS<sup>[1](#ref1)</sup> system to verify this theory.
+
+### High-Level Objectives
+
+* Write the power management firmware for entering low power states for the radio, microcontroller and oscillator.
+* Add duty cycling awareness to the synchronization protocol.
+* Expose the Kalman filter covariance to the firmware and adapt the messaging rate accordingly.
+* Instrument the testbed to measure power consumption.
+* Setup and run a complete testbed environment to benchmark the energy efficiency.
 
 ## Getting Started
 
@@ -142,5 +155,7 @@ Remember to replace the `192.168.50.165` from the example above with the IP addr
 Upon reset, the device will wait 20 seconds for firmware update requests before entering the currently loaded program.
 
 ## References
+
+1. Hani Esmaeelzadeh and Amr Alanwar. "PLoTS: Power Efficient Localization and Time Synchronization" <a name="ref1"></a>
 
 ## Attributions
