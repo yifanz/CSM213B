@@ -1,7 +1,7 @@
 # CS213B/EE202B
 UCLA CS213B/EE202B Winter 2017 - Prof. Mani Srivastava
 
-Yan Zhang
+Yan Zhang (charlesz1112@gmail.com)
 
 Yi-Fan Zhang (yifanz@ucla.edu)
 
