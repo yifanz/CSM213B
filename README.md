@@ -21,7 +21,7 @@ Often the only available means of lowering error is by increasing communication 
 This is highly undesirable for energy-constrained systems as well as large scale deployments where the energy cost becomes magnified.
 
 While some messaging between devices is inevitable in the system we are investigating, we believe that by judiciously duty cycling the operation of the system, we can mitigate the energy overhead without significantly degrading the accuracy of the localization and time synchronization.
-Prelimiary offline simulations strongly suggest that the Kalman filter covariance is a good indicator for the state of synchronization of the system<sup>[1](#ref1)</sup>.
+Preliminary offline simulations strongly suggest that the Kalman filter covariance is a good indicator for the state of synchronization of the system<sup>[1](#ref1)</sup>.
 By exposing this information to the control system in realtime, we could adjust the messaging rate with reference to a desired confidence threshold and predict the optimal sleep and wake schedule for each device.
 We feel confident in our model and we are ready to verify it against real-world data.
 To this end, we propose to do a hardware and software implemention of the PLoTS<sup>[1](#ref1)</sup> system.
