@@ -8,31 +8,52 @@ Yi-Fan Zhang (yifanz@ucla.edu)
 #### Table of Contents
 
 1. [Project Proposal](#project-proposal)
-2. [Getting Started](#getting-started)
-3. [References](#references)
-4. [Attributions](#attributions)
+2. [Weekly Updates](#weekly-updates)
+3. [Getting Started](#getting-started)
+4. [References](#references)
+5. [Attributions](#attributions)
 
 ## Project Proposal
 
-### Implement the PLoTS System
+### PLoTS: Power Efficient Localization and Time Synchronization<sup>[1](#ref1)</sup>
 
 Maintaining accurate time synchonization and localization is a common requirement for many networked embedded systems.
 Often the only available means of lowering error is by increasing communication between devices at the expense of energy efficiency.
 This is highly undesirable for energy-constrained systems as well as large scale deployments where the energy cost becomes magnified.
 
 While some messaging between devices is inevitable in the system we are investigating, we believe that by judiciously duty cycling the operation of the system, we can mitigate the energy overhead without significantly degrading the accuracy of the localization and time synchronization.
+Recent works have proposed various forms of duty cycling to reduce energy consumption in similar types of networks<sup>[2](#ref2),[3](#ref3)</sup>.
+The consensus is to turn off the radio during idle times and reactivate it exactly before the next transmission or reception.
+This approach depends heavily on the system's accuracy of time synchronization.
+However, in practice, it is often not feasible to have near perfect (sub-microsecond) synchronization and we must take into account the error.
+
+Our aim is to enhance our indoor localization system to be able to adapt its operation based on the current synchronization error.
 Preliminary offline simulations strongly suggest that the Kalman filter covariance is a good indicator for the state of synchronization of the system<sup>[1](#ref1)</sup>.
 By exposing this information to the control system in realtime, we could adjust the messaging rate with reference to a desired confidence threshold and predict the optimal sleep and wake schedule for each device.
-We feel confident in our model and we are ready to verify it against real-world data.
-To this end, we propose to do a hardware and software implemention of the PLoTS<sup>[1](#ref1)</sup> system.
+
+We propose to do a hardware and software implemention of the PLoTS<sup>[1](#ref1)</sup> based on the ntb_v2 development board and crazyflie quadracopter.
+Both systems are equipt with a DecaWave ultra-wideband radio which will be used perform time synchronization and localization.
+We will develop the firmware for adaptively duty cycling the radio and microcontroller according to the covariance calculated from the Kalman filter algorithm.
+We can holistically measure the energy consumption of the quadracopter based on flight time; however, PCB level modifications may be needed to instrument the ntb_v2 anchor board.
+As an additional optimization, we are considering replacing the conventional onboard oscillator with a novel pre-energizing crystal resonator to minimize the wake up latency of the system to help achieve the maximum energy efficiency.
+At the end, we will compare the energy consumption and synchronization error of adaptive duty cycling using PLoTS over a range of error tolerance thresholds against various fixed duty cycling frequencies.
 
 ### High-Level Objectives
 
-* Write the power management firmware for entering low power states for the radio, microcontroller and oscillator.
+* Write the power management firmware for entering low power states microcontroller and duty cycling the radio.
 * Add duty cycling awareness to the synchronization protocol.
 * Expose the Kalman filter covariance to the firmware and adapt the messaging rate accordingly.
 * Instrument the testbed to measure power consumption.
-* Setup and run a complete testbed environment to benchmark the energy efficiency.
+* Integrate the pre-energizing crystal resonator.
+* Setup and run a complete testbed environment to benchmark the energy efficiency and synchronization error.
+
+## Weekly Updates
+
+### Week 5 (Feb 6 - Feb 12)
+
+* Write proposal
+* Setup test environment
+* Implement functions for entering lower power MCU states
 
 ## Getting Started
 
@@ -160,5 +181,7 @@ Upon reset, the device will wait 20 seconds for firmware update requests before 
 ## References
 
 1. Hani Esmaeelzadeh and Amr Alanwar. "PLoTS: Power Efficient Localization and Time Synchronization" <a name="ref1"></a>
+2. Zhen, ChengFang, et al. "Energy-efficient sleep/wake scheduling for acoustic localization wireless sensor network node." International Journal of Distributed Sensor Networks 2014 (2014). <a name="ref2"></a>
+3. Wu, Yan, Sonia Fahmy, and Ness B. Shroff. "Optimal QoS- aware sleep/wake scheduling for time-synchronized sensor networks." 2006 40th Annual Conference on Information Sciences and Systems. IEEE, 2006. <a name="ref3"></a>
 
 ## Attributions
