@@ -52,8 +52,14 @@ At the end, we will compare the energy consumption and synchronization error of 
 ### Week 5 (Feb 6 - Feb 12)
 
 * Write proposal
-* Setup test environment
+* Setup test environment in the lab
+* Proposed hardware changes to measure hardware power consumption
+* Requested custom crystal from Dr. Pamarti's group
+
+### Week 6 (Feb 13 - Feb 19)
+
 * Implement functions for entering lower power MCU states
+* Collecting stats in all nodes
 
 ## Getting Started
 
