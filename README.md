@@ -51,10 +51,11 @@ At the end, we will compare the energy consumption and synchronization error of 
 
 ### Week 5 (Feb 6 - Feb 12)
 
-* Write proposal
-* Setup test environment in the lab
-* Proposed hardware changes to measure hardware power consumption
-* Requested custom crystal from Dr. Pamarti's group
+* Write proposal.
+* Setup development environment and repository branch.
+* Setup test environment in the lab (thanks to Amr and Manoj for coming in on the weekend).
+* Proposed hardware changes to measure hardware power consumption.
+* Requested custom crystal from Dr. Pamarti's group.
 
 ### Week 6 (Feb 13 - Feb 19)
 
@@ -100,10 +101,12 @@ $ sudo pip install numpy
 
 ### Getting the source code
 
-This is a private repository and you will need to get added as a collaborator.
+MobileRadar is a private repository and you will need to get added as a collaborator. All of the code for this project is in the `EE202B_winter17` branch.
 
 ```
 $ git clone https://github.com/nesl/MobileRadar.git
+cd MobileRadar
+git checkout EE202B_winter17
 ```
 
 ### Flashing the device
