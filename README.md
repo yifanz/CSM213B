@@ -59,8 +59,14 @@ At the end, we will compare the energy consumption and synchronization error of 
 
 ### Week 6 (Feb 13 - Feb 19)
 
+* Setup the testbed for localization and time synchronization.
+* Implement the Kalman filter on the ntb board.
+* Implement a way to collect stats from all nodes.
+* Expand the UWB radio message to include an epsilon value which is a parameter that is needed for distributed Kalman.
+
+### Week 7 (Feb 20 - Feb 26)
+
 * Implement functions for entering lower power MCU states
-* Collecting stats in all nodes
 
 ## Getting Started
 
