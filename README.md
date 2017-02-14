@@ -60,12 +60,12 @@ At the end, we will compare the energy consumption and synchronization error of 
 ### Week 6 (Feb 13 - Feb 19)
 
 * Setup the testbed for localization and time synchronization.
-* Implement the Kalman filter on the ntb board.
-* Implement a way to collect stats from all nodes.
+* Implement a communication protocol between nodes for collecting and broadcasting stats.
+* Implement entering and exiting from lower power MCU states.
 
 ### Week 7 (Feb 20 - Feb 26)
 
-* Implement functions for entering lower power MCU states
+* Implement distributed Kalman filter on devices.
 
 ## Getting Started
 
