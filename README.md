@@ -60,11 +60,11 @@ At the end, we will compare the energy consumption and synchronization error of 
 ### Week 6 (Feb 13 - Feb 19)
 
 * Setup the testbed for localization and time synchronization.
-* Implement a communication protocol between nodes for collecting and broadcasting stats.
 * Implement entering and exiting from lower power MCU states.
 
 ### Week 7 (Feb 20 - Feb 26)
 
+* Implement a communication protocol between nodes for collecting and broadcasting stats.
 * Implement distributed Kalman filter on devices.
 
 ## Getting Started
