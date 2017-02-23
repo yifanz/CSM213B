@@ -197,5 +197,6 @@ Upon reset, the device will wait 20 seconds for firmware update requests before 
 1. Hani Esmaeelzadeh and Amr Alanwar. "PLoTS: Power Efficient Localization and Time Synchronization" <a name="ref1"></a>
 2. Zhen, ChengFang, et al. "Energy-efficient sleep/wake scheduling for acoustic localization wireless sensor network node." International Journal of Distributed Sensor Networks 2014 (2014). <a name="ref2"></a>
 3. Wu, Yan, Sonia Fahmy, and Ness B. Shroff. "Optimal QoS- aware sleep/wake scheduling for time-synchronized sensor networks." 2006 40th Annual Conference on Information Sciences and Systems. IEEE, 2006. <a name="ref3"></a>
+4. Federico S. Cattivelli and Ali H. Sayed. "Distributed Nonlinear Kalman Filtering With Applications to Wireless Localization." Department of Electrical Engineering University of California, Los Angeles. <a name="ref4"></a>
 
 ## Attributions
