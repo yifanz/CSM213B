@@ -76,6 +76,7 @@ Ubuntu 14.04 Desktop Edition.
 ```
 $ sudo apt-get install dfu-util
 $ sudo apt-get install gcc-arm-none-eabi
+$ sudo apt-get install curl
 
 $ dfu-util -V
 dfu-util 0.5
