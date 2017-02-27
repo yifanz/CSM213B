@@ -102,6 +102,7 @@ Python 2.7.6
 
 $ sudo apt-get install python-pip
 $ sudo pip install numpy
+$ sudo pip install pyserial
 ```
 
 ### Getting the source code
