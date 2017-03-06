@@ -65,15 +65,16 @@ At the end, we will compare the energy consumption and synchronization error of 
 ### Week 7 (Feb 20 - Feb 26)
 
 * Implement a communication protocol between nodes for collecting and broadcasting stats.
-* Understand the Matlab code for the Distributed Kalman Filter algorithm.
-* Add C++ toolchain and build scripts to prepare for porting DKF to the ntb board.
 
 ### Week 8 (Feb 27 - Mar 5)
 
-* Port DKF from Matlab to C++.
-* Implement UWB radio low power modes.
+* Understand the Matlab code for the Distributed Kalman Filter algorithm.
+* Add C++ toolchain and build scripts to prepare for porting DKF to the ntb board.
 
 ### Week 9 (Mar 6 - Mar 12)
+
+* Port DKF from Matlab to C++.
+* Implement UWB radio low power modes.
 
 ### Week 10 (Mar 13 - Mar 19)
 
