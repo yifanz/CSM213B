@@ -8,14 +8,18 @@ Yi-Fan Zhang (yifanz@ucla.edu)
 #### Table of Contents
 
 1. [Project Proposal](#project-proposal)
- * [Objectives](#high-level-objectives)
-2. [Results](#results)
- * [Project Files](#project-files)
-3. [Future Work](#future-work)
-4. [Weekly Updates](#weekly-updates)
-5. [Developer Setup](#getting-started)
-6. [References](#references)
-7. [Attributions](#attributions)
+    * [Objectives](#high-level-objectives)
+2. [Project Files](#project-files)
+3. [Results](#results)
+    * [Custom Crystal Oscillator](#custom-crystal-oscillator)
+    * [PCB Modifications](#pcb-modifications)
+    * [Firmware](#power-management-firmware)
+    * [DKF Implementation](#distributed-kalman-filter-implementation)
+4. [Future Work](#future-work)
+5. [Weekly Updates](#weekly-updates)
+6. [Developer Setup](#getting-started)
+7. [References](#references)
+8. [Attributions](#attributions)
 
 ## Project Proposal
 
@@ -51,13 +55,11 @@ At the end, we will compare the energy consumption and synchronization error of 
 * Integrate the pre-energizing crystal resonator.
 * Setup and run a complete testbed environment to benchmark the energy efficiency and synchronization error.
 
-## Results
-
-### Project Files
+## Project Files
 
 Presentation slides [[pdf](https://github.com/yifanz/CSM213B/blob/master/slides.pdf), [keynote](https://github.com/yifanz/CSM213B/blob/master/slides.key)].
 
-Source code for the project is tracked under two private repositories:
+Source code for the project is tracked under two __private__ repositories:
 
 __Distributed Kalman Filter C++ Implementation__
 ```
@@ -67,6 +69,33 @@ __NTB Firmware__ (`EE202B_winter17` branch of the NESL MobileRadar project)
 ```
 https://github.com/nesl/MobileRadar/tree/EE202B_winter17
 ```
+
+## Results
+
+> “If I had an hour to solve a problem I'd spend 55 minutes thinking about the problem and 5 minutes thinking about solutions.”    - Albert Einstein
+
+Einstein is reported to have said that if he only had one hour to solve a problem he would spend most of that time analyzing the problem and use the remaining time for solving it.
+This quote emphasizes the importance of laying the proper groundwork before rushing into any specific solutions to a problem. 
+Although we fell short of acheiving a complete software and hardware implementation of PLoTS, the results from our investigation and the incremental improvements we made to the NTB testbed are still valuable.
+
+With this in mind, we think it is better to view this effort as a precursor for PLoTS.
+We divided this project into two development tracks: hardware/firmware and algorithms/software.
+
+### Custom Crystal Oscillator
+
+TODO
+
+### PCB Modifications
+
+TODO
+
+### Power Management Firmware
+
+### Distributed Kalman Filter Implementation
+
+## Future Work
+
+TODO
 
 ## Weekly Updates
 
