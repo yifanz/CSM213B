@@ -8,8 +8,9 @@ Yi-Fan Zhang (yifanz@ucla.edu)
 #### Table of Contents
 
 1. [Project Proposal](#project-proposal)
+ * [Objectives](#high-level-objectives)
 2. [Results](#results)
-  * [Project Files](#project-files)
+ * [Project Files](#project-files)
 3. [Future Work](#future-work)
 4. [Weekly Updates](#weekly-updates)
 5. [Developer Setup](#getting-started)
@@ -53,6 +54,17 @@ At the end, we will compare the energy consumption and synchronization error of 
 ## Results
 
 ### Project Files
+
+Source code for the project is tracked under two private repositories:
+
+__Distributed Kalman Filter C++ Implementation__
+```
+https://github.com/yifanz/nesl-dkf
+```
+__NTB Firmware__ (`EE202B_winter17` branch of the NESL MobileRadar project)
+```
+https://github.com/nesl/MobileRadar/tree/EE202B_winter17
+```
 
 ## Weekly Updates
 
