@@ -8,12 +8,13 @@ Yi-Fan Zhang (yifanz@ucla.edu)
 #### Table of Contents
 
 1. [Project Proposal](#project-proposal)
-3. [Results](#results)
+2. [Results](#results)
   * [Project Files](#project-files)
-2. [Weekly Updates](#weekly-updates)
-3. [Developer Setup](#getting-started)
-4. [References](#references)
-5. [Attributions](#attributions)
+3. [Future Work](#future-work)
+4. [Weekly Updates](#weekly-updates)
+5. [Developer Setup](#getting-started)
+6. [References](#references)
+7. [Attributions](#attributions)
 
 ## Project Proposal
 
@@ -83,6 +84,10 @@ At the end, we will compare the energy consumption and synchronization error of 
 * Implement UWB radio low power modes.
 
 ### Week 10 (Mar 13 - Mar 19)
+
+* Continue debugging DKF algorithm.
+* Continue debugging low power modes.
+* Prepare presentation and write report.
 
 ## Getting Started
 
