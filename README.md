@@ -55,6 +55,8 @@ At the end, we will compare the energy consumption and synchronization error of 
 
 ### Project Files
 
+Presentation slides [[pdf](https://github.com/yifanz/CSM213B/blob/master/slides.pdf), [keynote](https://github.com/yifanz/CSM213B/blob/master/slides.key)].
+
 Source code for the project is tracked under two private repositories:
 
 __Distributed Kalman Filter C++ Implementation__
