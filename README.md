@@ -213,3 +213,11 @@ Upon reset, the device will wait 20 seconds for firmware update requests before 
 4. Federico S. Cattivelli and Ali H. Sayed. "Distributed Nonlinear Kalman Filtering With Applications to Wireless Localization." Department of Electrical Engineering University of California, Los Angeles. <a name="ref4"></a>
 
 ## Attributions
+
+This project uses open source code. The source code and
+corresponding license information is listed below.
+
+1. The DKF implementation uses the C++ Eigen linear math library [Eigen](http://eigen.tuxfamily.org). [[MPL2 License]](http://eigen.tuxfamily.org/index.php?title=Main_Page#License) [[source code]](https://bitbucket.org/eigen/eigen/src)
+2. The DKF simulator [Three.js](https://threejs.org) for the 3D visualizations. [[MIT License]](https://github.com/mrdoob/three.js/blob/dev/LICENSE) [[source code]](https://github.com/mrdoob/three.js)
+
+We like to thank Manoj Nagendiran for coming in on weekends to help us setup the project, Paul Martin for answering our questions about the NTB board design as well as the firmware used for this project, Hani Esmaeelzadeh for his work on the pre-charing crystal oscillator and lastly, Amr for being our mentor on this project.
