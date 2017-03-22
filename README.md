@@ -8,8 +8,10 @@ Yi-Fan Zhang (yifanz@ucla.edu)
 #### Table of Contents
 
 1. [Project Proposal](#project-proposal)
+3. [Results](#results)
+  * [Project Files](#project-files)
 2. [Weekly Updates](#weekly-updates)
-3. [Getting Started](#getting-started)
+3. [Developer Setup](#getting-started)
 4. [References](#references)
 5. [Attributions](#attributions)
 
@@ -46,6 +48,10 @@ At the end, we will compare the energy consumption and synchronization error of 
 * Instrument the testbed to measure power consumption.
 * Integrate the pre-energizing crystal resonator.
 * Setup and run a complete testbed environment to benchmark the energy efficiency and synchronization error.
+
+## Results
+
+### Project Files
 
 ## Weekly Updates
 
