@@ -70,7 +70,7 @@ __NTB Firmware__ (`EE202B_winter17` branch of the NESL MobileRadar project)
 https://github.com/nesl/MobileRadar/tree/EE202B_winter17
 ```
 
-If you are looking for the hardware design files, they are located here:
+If you are looking for the __hardware design__ files, they are located here:
 ```
 https://github.com/nesl/MobileRadar/tree/EE202B_winter17/hw_design
 ```
@@ -148,7 +148,7 @@ Having C++ also enables access to rich open source libraries. Here, we use the E
 In order to be compatible with the existing firmware on the ntb board written in C, we expose an "extern C" API.
 This way, we can use the C++ features from within libdkf without requiring the consumer of libdkf to also write in C++.
 To do this, we added a separate build step for the ntb firmware which compiles libdkf as a static library and then links it with the existing ntb firmware.
-One problem we encountered was the need to POSIX/libc style syscall symbols to be present in order to compile the C++ standard library and Eigen. To get around this, we had to implement stub syscall functions and build that with the firmware. Most of these functions are no-ops and this seems to be fine in our initial tests.
+One problem we encountered was the need to POSIX/libc style syscall symbols to be present in order to compile the C++ standard library and Eigen. To get around this, we had to implement stub syscall functions and link them with the firmware. Most of these functions are no-ops and this seems to be fine in our initial tests.
 
 #### dkf_sim
 
