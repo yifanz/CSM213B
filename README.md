@@ -79,7 +79,7 @@ This quote emphasizes the importance of laying the proper groundwork before rush
 Although we fell short of acheiving a complete software and hardware implementation of PLoTS, the results from our investigation and the incremental improvements we made to the NTB testbed are still valuable.
 
 With this in mind, we think it is better to view this effort as a precursor for PLoTS.
-We divided this project into two development tracks: hardware/firmware and algorithms/software.
+The project can be roughly divided into two development tracks: hardware/firmware and algorithms/software. In the following sections, we break this down even further to discuss of results on incorporating the custom oscillator, PCB power measurement redesign, power management firmware and the Distributed Kalman Filter implementation.
 
 ### Custom Crystal Oscillator
 
