@@ -70,6 +70,11 @@ __NTB Firmware__ (`EE202B_winter17` branch of the NESL MobileRadar project)
 https://github.com/nesl/MobileRadar/tree/EE202B_winter17
 ```
 
+If you are looking for the hardware design files, they are located here:
+```
+https://github.com/nesl/MobileRadar/tree/EE202B_winter17/hw_design
+```
+
 ## Results
 
 > “If I had an hour to solve a problem I'd spend 55 minutes thinking about the problem and 5 minutes thinking about solutions.”    - Albert Einstein
