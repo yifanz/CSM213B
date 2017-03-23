@@ -83,11 +83,11 @@ We divided this project into two development tracks: hardware/firmware and algor
 
 ### Custom Crystal Oscillator
 
-TODO
+For the board design that incorporates the new oscillator, much of Hani's setup is preserved as per Hani's strong request. However, only the 10MHz is used as the output. Board design aside, since the oscillation frequency and as well as the mechanism to turn off oscillator is changed, modification at the firmware level is needed for configuring the system clock and doing duty cycling with the new crystal. For example, one GPIO is needed to control the ON/OFF of the crystal whereas such function is supported internally through hardware for the internal oscillator. The board size is more than doubled because of all the components that are needed to make the prototype chip working well and to make debug possible when the prototype is not working.
 
 ### PCB Modifications
 
-TODO
+For measuring the power of MCU, a modular, isolated approach is used. A jumper pin is inserted between the MCU supply domain and the main 3.3V domain. The current sensing can be done using any current sensing break-out boards such as the INA219B and the streaming of power data can be collected through devices such as the BBB. The philosophy behind this approach is that no additional board power or CPU cycle is needed for power measurement. The existing power measuring streaming approach seems to burden the CPU so much that processor hang happens occasionally when the stream frequency is high. 
 
 ### Power Management Firmware
 
@@ -169,6 +169,16 @@ However, this is not a silver bullet solution.
 The codegen requires explicit types for arguments to functions that it is not able to automatically deduce and the existing DKF Matlab codebase makes heavy usage of dynamic types making it especially ill-suited for codegen.
 Despite this, we still feel that codegen is the way forward. Since one-shot code conversion is clearly not feasible, we recommend incrementally converting the existing MatLab code to be stricly compliant with the codegen.
 Using the MEX feature of MatLab (allows MatLab code to call into C/C++), we replace each function in the algorithm one at a time. For each replacement, we test inside MatLab to ensure numeric accuracy.
+
+From a chip design point of view, if any new custom design is intended to be used robustly in a system, then the following must be taken into consideration:
+
+* Simple and robust power supply strategy 
+* Self-sustained biasing
+* Output swing that is compatible with the MCU
+
+Taking care of the above three will simplify the board design substantially and potentially keep the original board size. 
+
+In terms of energy optimization and power management, we think that the conventional low power techniques have not been fully deployed on the existing NTB hardware/software platform. From a different perspective, conventional techniques saves CPU by outsourcing peripherals whereas for NTB, care must be given to the peripheral, which are mainly UWB radio and ethernet switches, so that they are in a good state before and after sleep. In some sense, dealing with the ntb platform may not be worth the initial productivity cost. It may have been more effective to do the initial development on a commerical well-supported platform (mbed, beaglebone, etc) so our resources can be free to focus more on the UWB radio power management.
 
 ## Weekly Updates
 
