@@ -91,11 +91,84 @@ TODO
 
 ### Power Management Firmware
 
+In terms of power management, we wanted to modify the ntb_v2 firmware such that the microcontroller (MCU) and the DW1000 ultra-wideband (UWB) radio could be duty cycled.
+While we were able to successfully put both the MCU and UWB radio to sleep, we ran into difficulty with the wake-up.
+
+#### MCU Sleep
+
+The MCU on the ntb_v2 development board is a STM32F407 ARM Cortex-M4. According to the manual, this class of MCUs from STM features three low-power operating modes<sup>[5](#ref5)</sup>:
+
+* Sleep mode (Cortex®-M4 with FPU core stopped, peripherals kept running)
+* Stop mode (all clocks are stopped)
+* Standby mode (1.2 V domain powered off)
+
+The Sleep mode can easily be entered using the `__WFI()` macro (wait for interrupt) provided by the hardware abstraction layer (HAL).
+This simply halts the MCU until the next interrupt.
+The Stop mode powers down the HSE (high-speed external clock) in addition to halting the processor.
+In this mode, interrupts will not wake the MCU. Instead, we configured an EXTI line via the NVIC to wake the processor.
+Before entering Stop mode, we set the RTC (realtime clock) to assert the EXTI line after some number of cycles.
+While the MCU can sleep and wake without problems, the off-chip peripherals (ethernet switch and UWB radio) enter a corrupted state upon wake-up.
+We suspect two main causes. First, missing interrupts from the peripheral while the MCU is asleep could cause the peripheral to enter an error state. Second, there may be some misconfiguration of on-chip serial (SPI, I2C) controllers upon wake-up that leads to subsequent miscommunication with off-chip peripherals.
+We didn't consider the Standby mode because this will cause SRAM contents to become lost and the MCU will essentially soft-reset on wake-up.
+Persisting the memory state to flash before sleeping and then writing custom reset handlers to re-initialize the state is out of scope for this project.
+
+#### UWB Radio Sleep
+
+The UWB radio has a rich set of operating modes (SLEEP, IDLE, SNOOZE, RX, etc) along with several recommended duty cycling regimes<sup>[6](#ref6)</sup>.
+This includes a low-power listening mode where the radio is predominantly in the SLEEP state and only wakes periodically to sample the media for preamble sequences.
+In this mode, the radio uses a two-phase listen to minimize missing too many messages from a sender.
+Between each long SLEEP period, the radio will alternate between IDLE-RX-SNOOZE-IDLE-RX to listen for a preamble.
+
+Similar to the case with the MCU, we were able to configure the radio for sleep, but we were not able to properly restore the radio's state upon wake-up. We feel this is most likely a result of misconfiguration.
+The primary challenge with working with the radio is understanding the low level HAL as well as learning how to configure the hardware registers. Looking back, building a good library or abstraction layer for the radio alone would have been a sufficiently challenging project.
+
 ### Distributed Kalman Filter Implementation
+
+The Distributed Kalman Filter algorithm (DKF) is a pre-requisite for PLoTS.
+This algorithm is responsible for doing the localization, time synchronization and producing the covariance metric which is needed for guiding the duty cycling times.
+However, DKF is only implemented in MatLab. Our goal was to port the MatLab DKF implementation to C++ such that it could be executed on a MCU.
+This is a duanting task for many reasons.
+Firstly, our MCU is limited to ~200 KB program and data memory and the MatLab code is not written with memory optimization in mind.
+Second, the algorithm makes use of linear math operations on not only floating point numbers, but also complex numbers.
+Third, the development cycle (compile, build, test) on the ntb board is on the order of 30 seconds to a minute and the debugging and logging facilities on the board are lacking.
+To overcome these problems, we decided to split the DKF implementation into two sub-projects: libdkf and dkf_sim.
+
+#### libdkf
+
+Libdkf is written as a modern cross-platform C++ library which implements the core DKF algorithm.
+We leverage the C++ standard library for its implementation of complex numbers and common data structures.
+We also use a modern C++11 compliant compiler to enable better language level mapping between MatLab and C++ (e.g. lambda functions).
+Having C++ also enables access to rich open source libraries. Here, we use the Eigen linear math library because of its maturity and portability across different architectures.
+
+In order to be compatible with the existing firmware on the ntb board written in C, we expose an "extern C" API.
+This way, we can use the C++ features from within libdkf without requiring the consumer of libdkf to also write in C++.
+To do this, we added a separate build step for the ntb firmware which compiles libdkf as a static library and then links it with the existing ntb firmware.
+One problem we encountered was the need to POSIX/libc style syscall symbols to be present in order to compile the C++ standard library and Eigen. To get around this, we had to implement stub syscall functions and build that with the firmware. Most of these functions are no-ops and this seems to be fine in our initial tests.
+
+#### dkf_sim
+
+Dkf_sim allows us to test libdkf on the PC using offline measurement data similar to the MatLab implementation.
+This allows us to develop the code while leveraging the rich set of debugging tools on the PC.
+We also developed a 3D visualization tool to help break our dependence on MatLab's plotting packages.
+Currently, dkf_sim is able to process the full set of offline measurement data, but the numeric results drift further away from MatLab's as the calculation progresses.
+We suspect two reasons for the drift: high-level logic bugs in the implementation and the fact that we are not accounting for the bias correction logic that the MatLab code applies.
+Fixing these issues will be addressed in future work.
 
 ## Future Work
 
-TODO
+PLoTS is a combination of three projects with each one having the scope and complexity of an entire term project. In retrospect, we grossly underestimated this and it would have probably been more productive to put our focus on a single one rather than attempt all three simultaneously.
+
+* DKF Algorithm Implementation
+* Hardware Design (Oscillator + Power Measurement)
+* Power Management Firmware
+
+In terms of the DKF implementation, we discovered too late that there exists a MatLab Coder plugin which can be used to translate MatLab script to C and C++.
+Looking back, this would have been a better approach than what was actually did; translates roughly 535 lines of MatLab to 1062 lines of C++.
+Using the codegen feature of MatLab Coder, one could automatically convert MatLab scripts into C/C++ at a per function granularity.
+However, this is not a silver bullet solution.
+The codegen requires explicit types for arguments to functions that it is not able to automatically deduce and the existing DKF Matlab codebase makes heavy usage of dynamic types making it especially ill-suited for codegen.
+Despite this, we still feel that codegen is the way forward. Since one-shot code conversion is clearly not feasible, we recommend incrementally converting the existing MatLab code to be stricly compliant with the codegen.
+Using the MEX feature of MatLab (allows MatLab code to call into C/C++), we replace each function in the algorithm one at a time. For each replacement, we test inside MatLab to ensure numeric accuracy.
 
 ## Weekly Updates
 
@@ -265,6 +338,8 @@ Upon reset, the device will wait 20 seconds for firmware update requests before 
 2. Zhen, ChengFang, et al. "Energy-efficient sleep/wake scheduling for acoustic localization wireless sensor network node." International Journal of Distributed Sensor Networks 2014 (2014). <a name="ref2"></a>
 3. Wu, Yan, Sonia Fahmy, and Ness B. Shroff. "Optimal QoS- aware sleep/wake scheduling for time-synchronized sensor networks." 2006 40th Annual Conference on Information Sciences and Systems. IEEE, 2006. <a name="ref3"></a>
 4. Federico S. Cattivelli and Ali H. Sayed. "Distributed Nonlinear Kalman Filtering With Applications to Wireless Localization." Department of Electrical Engineering University of California, Los Angeles. <a name="ref4"></a>
+5. RM0090 Reference manual for STM32F405/415, STM32F407/417, STM32F427/437 and STM32F429/439 advanced ARM-based 32-bit MCUs. <a name="ref5"></a>
+6. DW1000 USER MANUAL<a name="ref6"></a>
 
 ## Attributions
 
